@@ -12,8 +12,13 @@ class Input extends Component {
   onSubmit(e) {
     e.preventDefault();
     this.setState({text: ""});
-    this.props.onSendMessage(this.state.text);
+    try {
+      this.props.onSendMessage(this.state.text);
+    } catch (error) {
+      alert(`Došlo je do greške prilikom slanja poruke: ${error.message}`);
+    }
   }
+    
   
   render() {
     return (
@@ -24,7 +29,7 @@ class Input extends Component {
             value={this.state.text}
             type="text"
             placeholder="Enter your message and press ENTER"
-            autofocus="true"
+            autoFocus={true}
           />
           <button>Send</button>
         </form>
